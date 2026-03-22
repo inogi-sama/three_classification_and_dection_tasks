@@ -1,0 +1,1 @@
+Detected Patho Cols: Margin=closest_resection_margin_in_cm, Meta=pN_stage, Site=primary_tumor_site

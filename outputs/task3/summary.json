@@ -1,0 +1,9 @@
+{
+  "n_samples_test": 149,
+  "n_text_known": 137,
+  "n_text_unknown": 12,
+  "n_warning_total": 15,
+  "n_warning_conflict": 11,
+  "n_warning_unknown_highrisk": 4,
+  "high_risk_threshold": 0.7
+}

@@ -1,0 +1,40 @@
+{
+  "n_total": 581,
+  "label_distribution": {
+    "0": 295,
+    "1": 286
+  },
+  "model_compare": {
+    "logreg": {
+      "cv_auc_mean": 0.5762246890739028,
+      "test_auc": 0.5274693161893629,
+      "test_acc@0.5": 0.5299145299145299,
+      "test_recall_pos@0.5": 0.5172413793103449
+    },
+    "rf": {
+      "cv_auc_mean": 0.6123708329050606,
+      "test_auc": 0.6586791350087667,
+      "test_acc@0.5": 0.6495726495726496,
+      "test_recall_pos@0.5": 0.5344827586206896
+    }
+  },
+  "best_model": "rf",
+  "best_th_selected": 0.43000000000000005,
+  "metrics_at_best_th": {
+    "threshold": 0.43000000000000005,
+    "accuracy": 0.5982905982905983,
+    "precision_pos": 0.5578947368421052,
+    "recall_pos": 0.9137931034482759,
+    "f1_pos": 0.6928104575163399,
+    "confusion_matrix": [
+      [
+        17,
+        42
+      ],
+      [
+        5,
+        53
+      ]
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "text_col": "report_text_en",
+  "n_total": 763,
+  "n_rule_labeled": 41,
+  "coverage": 0.8925294888597641,
+  "label_counts": {
+    "1.0": 540,
+    "0.0": 141,
+    "NaN": 82
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "n_total": 743,
+  "n_train": 594,
+  "n_test": 149,
+  "label_distribution_total": {
+    "0": 327,
+    "1": 416
+  },
+  "model_compare": {
+    "logreg": {
+      "cv_auc_mean": 0.9361200823957795,
+      "cv_auc_std": 0.02066376200558395,
+      "test_auc": 0.9216867469879517,
+      "test_acc@0.5": 0.8657718120805369,
+      "test_f1_pos@0.5": 0.8795180722891566,
+      "test_recall_pos@0.5": 0.8795180722891566,
+      "test_precision_pos@0.5": 0.8795180722891566,
+      "test_cm@0.5": [
+        [
+          56,
+          10
+        ],
+        [
+          10,
+          73
+        ]
+      ]
+    },
+    "rf": {
+      "cv_auc_mean": 0.9374690736842244,
+      "cv_auc_std": 0.01923409433027229,
+      "test_auc": 0.9240598758671047,
+      "test_acc@0.5": 0.912751677852349,
+      "test_f1_pos@0.5": 0.9182389937106918,
+      "test_recall_pos@0.5": 0.8795180722891566,
+      "test_precision_pos@0.5": 0.9605263157894737,
+      "test_cm@0.5": [
+        [
+          63,
+          3
+        ],
+        [
+          10,
+          73
+        ]
+      ]
+    }
+  },
+  "selected_model_by_test_auc": "rf",
+  "selected_model_test_auc": 0.9240598758671047,
+  "threshold_selection_mode": "constrained_recall>=0.6",
+  "best_threshold_metrics_on_test": {
+    "threshold": 0.5500000000000002,
+    "accuracy": 0.9261744966442953,
+    "precision_pos": 0.9864864864864865,
+    "recall_pos": 0.8795180722891566,
+    "f1_pos": 0.9299363057324841,
+    "confusion_matrix": [
+      [
+        65,
+        1
+      ],
+      [
+        10,
+        73
+      ]
+    ]
+  },
+  "cm_at_best_threshold": [
+    [
+      65,
+      1
+    ],
+    [
+      10,
+      73
+    ]
+  ]
+}

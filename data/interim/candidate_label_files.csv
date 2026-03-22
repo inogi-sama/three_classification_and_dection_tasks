@@ -1,0 +1,8 @@
+file,name
+C:\Users\h5217\PycharmProjects\pathology_fusion\data\raw\dictionaries\DataSplits_DataDictionaries\DataDictionary_blood.csv,DataDictionary_blood.csv
+C:\Users\h5217\PycharmProjects\pathology_fusion\data\raw\dictionaries\DataSplits_DataDictionaries\DataDictionary_clinical.csv,DataDictionary_clinical.csv
+C:\Users\h5217\PycharmProjects\pathology_fusion\data\raw\dictionaries\DataSplits_DataDictionaries\DataDictionary_pathological.csv,DataDictionary_pathological.csv
+C:\Users\h5217\PycharmProjects\pathology_fusion\data\raw\dictionaries\DataSplits_DataDictionaries\dataset_split_in.json,dataset_split_in.json
+C:\Users\h5217\PycharmProjects\pathology_fusion\data\raw\dictionaries\DataSplits_DataDictionaries\dataset_split_Oropharynx.json,dataset_split_Oropharynx.json
+C:\Users\h5217\PycharmProjects\pathology_fusion\data\raw\dictionaries\DataSplits_DataDictionaries\dataset_split_out.json,dataset_split_out.json
+C:\Users\h5217\PycharmProjects\pathology_fusion\data\raw\dictionaries\DataSplits_DataDictionaries\dataset_split_treatment_outcome.json,dataset_split_treatment_outcome.json
