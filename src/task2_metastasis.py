@@ -51,14 +51,9 @@ def eval_at_threshold(y_true, y_prob, th):
 
 def find_best_threshold(y_true, y_prob, min_recall=0.60):
     """
-    阈值策略：
     - 先在 [0.05, 0.95] 范围内搜索
     - 优先满足 recall >= min_recall 的阈值里，选 F1 最高（若并列再看 precision）
     - 如果一个都不满足，则退化为全局 F1 最优
-    返回:
-        best_metrics: 最优阈值对应指标(dict)
-        th_table: 全阈值扫描表(DataFrame)
-        mode: 选择模式说明字符串
     """
     grid = np.arange(0.05, 0.96, 0.01)
     rows = [eval_at_threshold(y_true, y_prob, th) for th in grid]
@@ -123,8 +118,7 @@ def main():
         X, y, pids, test_size=0.2, random_state=42, stratify=y
     )
 
-    # LR: 标准化 + 逻辑回归（类别不平衡加权）
-    # RF: 随机森林（类别不平衡加权）
+
     models = {
         "logreg": Pipeline([
             ("scaler", StandardScaler()),
@@ -138,26 +132,26 @@ def main():
         )
     }
 
-    #训练集内部做5折CV，用于评估稳定性
+
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
-    #test AUC 选最佳模型
+
     all_results = {}
     best_model_name, best_auc = None, -1
     best_probs, best_pred_05 = None, None
 
-    # ---------- 5.5 训练与评估 ----------
+
     for name, model in models.items():
-        # (a) 训练集5折交叉验证AUC
+
         cv_auc = cross_val_score(model, X_train, y_train, cv=cv, scoring="roc_auc", n_jobs=-1)
 
-        # (b) 在完整训练集拟合，然后在独立测试集评估
+
         model.fit(X_train, y_train)
         prob = model.predict_proba(X_test)[:, 1]
         pred05 = (prob >= 0.5).astype(int)
         auc = roc_auc_score(y_test, prob)
 
-        # (c) 汇总指标
+
         all_results[name] = {
             "cv_auc_mean": float(cv_auc.mean()),
             "cv_auc_std": float(cv_auc.std()),
@@ -169,32 +163,30 @@ def main():
             "test_cm@0.5": confusion_matrix(y_test, pred05).tolist()
         }
 
-        # (d) 按 test AUC 选择最佳模型
+
         if auc > best_auc:
             best_auc = auc
             best_model_name = name
             best_probs = prob
             best_pred_05 = pred05
 
-    # ---------- 5.6 对最佳模型做阈值优化 ----------
+
     best_th_metrics, th_table, th_mode = find_best_threshold(
         y_test, best_probs, min_recall=0.60
     )
     best_th = float(best_th_metrics["threshold"])
     pred_best = (best_probs >= best_th).astype(int)
 
-    # ---------- 5.7 导出ROC曲线点 ----------
-    # 方便后续画图（Excel/Matplotlib都能用）
+
     fpr, tpr, ths = roc_curve(y_test, best_probs)
     roc_df = pd.DataFrame({"fpr": fpr, "tpr": tpr, "threshold": ths})
 
-    # ---------- 5.8 保存中间与结果文件 ----------
-    # 阈值扫描全表
+
     th_table.to_csv(OUT_DIR / "threshold_scan.csv", index=False)
-    # ROC曲线点
+
     roc_df.to_csv(OUT_DIR / "roc_curve_best_model.csv", index=False)
 
-    # 测试集逐样本预测
+
     pred_df = pd.DataFrame({
         "patient_id": pid_test,
         "y_true": y_test,
@@ -204,7 +196,7 @@ def main():
     })
     pred_df.to_csv(OUT_DIR / "test_predictions_best_model.csv", index=False)
 
-    # 总结JSON
+
     summary = {
         "n_total": int(len(y)),
         "n_train": int(len(y_train)),
@@ -221,7 +213,7 @@ def main():
     with open(OUT_DIR / "metrics.json", "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2)
 
-    # ---------- 5.9 控制台输出 ----------
+
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     print("saved to:", OUT_DIR.resolve())
     plot_results(roc_df, best_auc, OUT_DIR)

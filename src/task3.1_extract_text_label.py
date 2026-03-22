@@ -108,7 +108,7 @@ def main():
         clf.fit(X_train, y_train)
         probs = clf.predict_proba(tmp["text"].tolist())[:, 1]
 
-        # 自动找阈值，优先达到覆盖率
+        #自动找阈值，优先达到覆盖率
         best = None
         for m in np.arange(0.49, -0.001, -0.01):  # margin from center 0.5
             pos_th = 0.5 + m

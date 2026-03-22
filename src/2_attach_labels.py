@@ -4,7 +4,6 @@ import re
 import pandas as pd
 from pathlib import Path
 
-# --- 路径配置 ---
 ROOT = Path(__file__).resolve().parents[1]
 MASTER_IN = ROOT / "data" / "processed" / "master_table_stage1.csv"
 MASTER_OUT = ROOT / "data" / "processed" / "master_table_stage2_labeled.csv"

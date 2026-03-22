@@ -9,7 +9,7 @@ OUT_SUMMARY = "outputs/task3/summary.json"
 
 Path("outputs/task3").mkdir(parents=True, exist_ok=True)
 
-# 可调阈值
+#changeable
 HIGH_RISK_THRESHOLD = 0.70
 
 def main():
@@ -23,13 +23,13 @@ def main():
     df["y_pred@0.55"] = pd.to_numeric(df["y_pred@0.55"], errors="coerce")
     df["y_prob"] = pd.to_numeric(df["y_prob"], errors="coerce")
 
-    # 规则1：明确冲突（文本阴性 vs 图像阳性）
+    #rule1：文本阴性图像阳性
     df["warning_conflict"] = (
         (df["text_metastasis_label"] == 0) &
         (df["y_pred@0.55"] == 1)
     ).astype(int)
 
-    # 规则2：文本未知但图像高度可疑
+    #rule2：文本未知但图像高度可疑
     df["warning_unknown_highrisk"] = (
         (df["text_metastasis_label"].isna()) &
         (df["y_prob"] >= HIGH_RISK_THRESHOLD)
@@ -37,7 +37,7 @@ def main():
 
     df["warning_flag"] = ((df["warning_conflict"] == 1) | (df["warning_unknown_highrisk"] == 1)).astype(int)
 
-    # 原因字段
+
     reasons = []
     for _, r in df.iterrows():
         if r["warning_conflict"] == 1:
