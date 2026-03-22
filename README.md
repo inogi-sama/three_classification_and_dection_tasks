@@ -210,7 +210,7 @@ def find_best_threshold(y_true, y_prob, min_recall=0.60):
 
 **ROC Curve**
 
-![Task 1 ROC Curve]([roc_curve_plot.png](https://hackmd-prod-images.s3.ap-northeast-1.amazonaws.com/uploads/upload_e33eaf509b9cc4c0225afc7518017f41.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1774187822&Signature=TU5tr2nAhpQDezITQ1mpZXD7YWE%3D))
+![Task 1 ROC Curve](https://hackmd-prod-images.s3.ap-northeast-1.amazonaws.com/uploads/upload_e33eaf509b9cc4c0225afc7518017f41.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1774187822&Signature=TU5tr2nAhpQDezITQ1mpZXD7YWE%3D)
 
 ---
 
